@@ -14,7 +14,7 @@ authRoute.get("/google",
 authRoute.get("/google/callback", 
     passport.authenticate("google", {
         failureRedirect: "/api/auth/failure",
-        successRedirect: "http://localhost:5173"
+        successRedirect: process.env.CLIENT_URL
     })
 )
 
@@ -35,7 +35,7 @@ authRoute.get("/logout", (req, res, next) => {
         if(err) {
             return next(err);
         }
-        res.redirect("http://localhost:5173")
+        res.redirect(process.env.CLIENT_URL)
     }); 
 })
 
