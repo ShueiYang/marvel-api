@@ -50,7 +50,7 @@ bookmarkRoute.post("/character", async(req, res) => {
             character,
         })
         const charBookmark = await newBookmark.save();
-        res.status(201).json(charBookmark.character)   
+        res.status(201).json(charBookmark)   
     
     } catch (err) {
         console.error(err)
@@ -71,7 +71,7 @@ bookmarkRoute.post("/comic", async(req, res) => {
             comic,
         })
         const comicBookmark = await newBookmark.save();
-        res.status(201).json(comicBookmark.comic)   
+        res.status(201).json(comicBookmark)   
     
     } catch (err) {
         console.error(err)
