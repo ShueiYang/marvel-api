@@ -21,10 +21,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+app.set('trust proxy', 1)
 app.use(cookieSession({
     name: "session", 
     maxAge: 1000 * 60 * 60 * 24, //24 hours
     keys: [ process.env.COOKIE_SECRET ],
+    sameSite: "none"
 }));
 
 
