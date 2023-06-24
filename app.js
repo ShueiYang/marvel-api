@@ -1,14 +1,14 @@
-const express = require('express');
+const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 require("./auth/passport");
 
-const comicsRoute = require('./routes/comic');
-const charactersRoute = require('./routes/characters');
-const loginRouter = require('./routes/auth');
 const fixSessionWithPassport = require("./middleware/fixSession");
-const bookmarkRoute = require('./routes/bookmark');
+const charactersRoute = require("./routes/characters/character.route");
+const comicsRoute = require("./routes/comic/comic.route");
+const loginRouter = require("./routes/auth");
+const bookmarkRoute = require("./routes/bookmark/bookmark.route");
 
 const app = express();
 
@@ -21,12 +21,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.set('trust proxy', 1)
+app.set("trust proxy", 1)
 app.use(cookieSession({
     name: "session", 
     maxAge: 1000 * 60 * 60 * 24, //24 hours
     keys: [ process.env.COOKIE_SECRET ],
-    sameSite: "none"
+    sameSite: "lax"
 }));
 
 
