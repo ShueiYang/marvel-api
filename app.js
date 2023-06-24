@@ -26,9 +26,8 @@ app.use(cookieSession({
     name: "session", 
     maxAge: 1000 * 60 * 60 * 24, //24 hours
     keys: [ process.env.COOKIE_SECRET ],
-    sameSite: "lax"
+    sameSite: process.env.NODE_ENV === "development" ? "lax" : "none"
 }));
-
 
 // fix passport 0.6V issue to register regenerate & save after the cookieSession middleware initialization
 app.use(fixSessionWithPassport);
