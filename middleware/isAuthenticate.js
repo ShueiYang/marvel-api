@@ -2,7 +2,7 @@
 
 function checkLoggedIn (req, res, next) {
     const isLoggedIn = req.isAuthenticated() && req.user;
-    console.log("checkAUTH", req.isAuthenticated());
+    console.log("checkAUTH", req.user);
     
     if(!isLoggedIn) {
         return res.status(200).json({
