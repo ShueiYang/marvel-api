@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 require("./auth/passport");
 
@@ -21,7 +21,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(cookieParser());
+// app.use(cookieParser());
 
 app.set("trust proxy", 1)
 // app.use(cookieSession({

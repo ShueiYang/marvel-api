@@ -24,15 +24,9 @@ authRoute.get("/google/callback",
         const token = jwt.sign(
             user,
             process.env.JWT_SECRET,
-            { expiresIn: "2h"}
+            { expiresIn: "1d"}
         )
-        res.cookie("marvel-jwt", token, {
-            httpOnly: false,
-            maxAge: 1000 * 60 * 60 * 2, // 2 hours
-            secure: process.env.NODE_ENV === "development" ? false : true,
-            sameSite: process.env.NODE_ENV === "development" ? "lax" : "none"
-        })
-        res.redirect(process.env.CLIENT_URL)
+        res.redirect(`${process.env.CLIENT_URL}/oauth/google/callback?token=${token}`)
     }
 )
 
@@ -47,18 +41,17 @@ authRoute.get("/login", checkLoggedIn, (req, res) => {
     });
 })
 
-authRoute.get("/logout", (req, res, next) => {
-     //Remove req.user and clears any logged in session
-    //  req.logout(function (err) {   
-    //     if(err) {
-    //         return next(err);
-    //     }
-    //     res.redirect(process.env.CLIENT_URL)
-    // }); 
-    // Clear the token on the client-side
-    res.clearCookie("marvel-jwt"); 
-    res.redirect(process.env.CLIENT_URL);
-})
-
+// authRoute.get("/logout", (req, res, next) => {
+//      //Remove req.user and clears any logged in session
+//     //  req.logout(function (err) {   
+//     //     if(err) {
+//     //         return next(err);
+//     //     }
+//     //     res.redirect(process.env.CLIENT_URL)
+//     // }); 
+//     // Clear the token on the client-side
+//     res.clearCookie("marvel-jwt"); 
+//     res.redirect(process.env.CLIENT_URL);
+// })
 
 module.exports = authRoute;

@@ -35,21 +35,21 @@ function checkLoggedIn (req, res, next) {
     //         user: null
     //     })
     // }
-    const token = req.cookies["marvel-jwt"];
-    if(!token) {
-        return res.status(200).json({
+    const accessToken = req.headers.authorization;
+    if(!accessToken) {
+        return res.status(401).json({
             success: false, 
-            user: null
+            message: "Unauthorize"
         })
     }
-
+    const token = accessToken.split(" ")[1]
     try {
         const decode = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decode;
         next();
         
     } catch (error) {
-        return res.status(403).json({error});
+        return res.status(403).json({ message: "Forbidden token" });
     }  
 }
 
