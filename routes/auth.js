@@ -18,8 +18,8 @@ authRoute.get("/google/callback",
         failureRedirect: "/api/auth/failure",
         // successRedirect: process.env.CLIENT_URL
     }),
+    // Generate a JWT with the user data
     (req, res) => {
-        // console.log("check USER", req.user)
         const user = req.user;
         const token = jwt.sign(
             user,
@@ -42,16 +42,13 @@ authRoute.get("/login", checkLoggedIn, (req, res) => {
 })
 
 // authRoute.get("/logout", (req, res, next) => {
-//      //Remove req.user and clears any logged in session
-//     //  req.logout(function (err) {   
-//     //     if(err) {
-//     //         return next(err);
-//     //     }
-//     //     res.redirect(process.env.CLIENT_URL)
-//     // }); 
-//     // Clear the token on the client-side
-//     res.clearCookie("marvel-jwt"); 
-//     res.redirect(process.env.CLIENT_URL);
+//     // Remove req.user and clears any logged in session
+//      req.logout(function (err) {   
+//         if(err) {
+//             return next(err);
+//         }
+//         res.redirect(process.env.CLIENT_URL)
+//     }); 
 // })
 
 module.exports = authRoute;

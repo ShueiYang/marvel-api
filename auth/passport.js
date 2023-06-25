@@ -14,18 +14,12 @@ passport.use(new googleStrategy({
     proxy: true
 },
     function verifiyCallback(accessToken, refreshToken, profile, done) {
+        // pick only neccessary data to attach on jwt
         const user = {
             id: profile.id,
             displayName: profile.displayName,
             photos: profile.photos
         };
-         // Generate a JWT with the user data
-        // const token = jwt.sign(
-        //     user,
-        //     process.env.JWT_SECRET,
-        //     { expiresIn: "2h"}
-        // )
-        // Pass the token to the callback
         done(null, user);
     }
 ));

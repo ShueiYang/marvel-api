@@ -1,11 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
-// const cookieParser = require("cookie-parser");
-const cookieSession = require("cookie-session");
 require("./auth/passport");
 
-const fixSessionWithPassport = require("./middleware/fixSession");
 const charactersRoute = require("./routes/characters/character.route");
 const comicsRoute = require("./routes/comic/comic.route");
 const loginRouter = require("./routes/auth");
@@ -21,22 +18,10 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-// app.use(cookieParser());
 
 app.set("trust proxy", 1)
-// app.use(cookieSession({
-//     name: "session", 
-//     maxAge: 1000 * 60 * 60 * 24, //24 hours
-//     keys: [ process.env.COOKIE_SECRET ],
-//     sameSite: process.env.NODE_ENV === "development" ? "lax" : "none"
-// }));
-
-// fix passport 0.6V issue to register regenerate & save after the cookieSession middleware initialization
-// app.use(fixSessionWithPassport);
-
 app.use(passport.initialize());
 // app.use(passport.session());
-
 
 
 app.get("/", (req, res)=> {

@@ -1,7 +1,6 @@
 const axios = require("axios");
 
 
-
 async function getAllCharacter(req, res) {
     try {
         const { name, skip } = req.query
