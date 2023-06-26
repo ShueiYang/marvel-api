@@ -1,4 +1,5 @@
 const express = require("express");
+const helmet = require("helmet");
 const cors = require("cors");
 const passport = require("passport");
 require("./auth/passport");
@@ -16,6 +17,7 @@ const corsOptions = {
     credentials: true,
 };
 
+app.use(helmet());
 app.use(cors(corsOptions));
 app.use(express.json());
 

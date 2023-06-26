@@ -5,8 +5,9 @@ const Comic = require("../../../models/Comic");
 
 async function deleteBookmarkCharacter(req, res) {
     try {
-        const { userId, id } = req.params;
-        if (!userId || !id) {
+        const userId = req.user.id; 
+        const { id } = req.params;
+        if (!id) {
             throw { status: 400, message: "Missing parameter" };
         }
         const result = await Character.findOneAndDelete({
@@ -27,8 +28,9 @@ async function deleteBookmarkCharacter(req, res) {
 
 async function deleteBookmarkComic(req, res) {
     try {
-        const { userId, id } = req.params;
-        if (!userId || !id) {
+        const userId = req.user.id; 
+        const { id } = req.params;
+        if (!id) {
             throw { status: 400, message: "Missing parameter" };
         }
         const result = await Comic.findOneAndDelete({

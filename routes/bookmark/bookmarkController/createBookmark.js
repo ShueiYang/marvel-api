@@ -5,8 +5,9 @@ const Comic = require("../../../models/Comic");
 
 async function bookmarkCharacter(req, res) {
     try {
-        const { userId, characterId, character } = req.body;
-        if (!userId || !characterId) {
+        const userId = req.user.id; 
+        const { characterId, character } = req.body;
+        if (!characterId) {
             throw { status: 400, message: "Missing parameter" };
         }
         const newBookmark = new Character({
@@ -26,8 +27,9 @@ async function bookmarkCharacter(req, res) {
 
 async function bookmarkComic(req, res) {
     try {
-        const { userId, comicId, comic } = req.body;
-        if (!userId || !comicId) {
+        const userId = req.user.id; 
+        const { comicId, comic } = req.body;
+        if (!comicId) {
             throw { status: 400, message: "Missing parameter" };
         }
         const newBookmark = new Comic({

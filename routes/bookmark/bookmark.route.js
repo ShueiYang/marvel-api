@@ -4,24 +4,25 @@ const bookmarkRoute = express.Router();
 const { getBookmarkCharacters, getBookmarkComics } = require("./bookmarkController/getBookmarkList");
 const { bookmarkCharacter, bookmarkComic } = require("./bookmarkController/createBookmark");
 const { deleteBookmarkCharacter, deleteBookmarkComic } = require("./bookmarkController/deleteBookmark");
+const checkLoggedIn = require("../../middleware/isAuthenticate");
 
 
-bookmarkRoute.get("/character", getBookmarkCharacters);
+bookmarkRoute.get("/character", checkLoggedIn, getBookmarkCharacters);
 
 
-bookmarkRoute.get("/comic", getBookmarkComics);
+bookmarkRoute.get("/comic", checkLoggedIn, getBookmarkComics);
 
 
-bookmarkRoute.post("/character", bookmarkCharacter);
+bookmarkRoute.post("/character", checkLoggedIn, bookmarkCharacter);
 
 
-bookmarkRoute.post("/comic", bookmarkComic);
+bookmarkRoute.post("/comic", checkLoggedIn, bookmarkComic);
 
 
-bookmarkRoute.delete("/character/:userId/:id", deleteBookmarkCharacter);
+bookmarkRoute.delete("/character/:id", checkLoggedIn, deleteBookmarkCharacter);
 
 
-bookmarkRoute.delete("/comic/:userId/:id", deleteBookmarkComic);
+bookmarkRoute.delete("/comic/:id", checkLoggedIn, deleteBookmarkComic);
 
 
 module.exports = bookmarkRoute;

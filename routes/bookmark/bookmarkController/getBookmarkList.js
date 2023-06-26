@@ -5,7 +5,7 @@ const Comic = require("../../../models/Comic");
 
 const getBookmarkCharacters = async(req, res) => {
     try {
-        const { userId } = req.query   
+        const userId = req.user.id; 
         if(!userId) {
           return res.status(200).json([]);
         }
@@ -21,7 +21,7 @@ const getBookmarkCharacters = async(req, res) => {
 
 async function getBookmarkComics(req, res) {
     try {
-        const { userId } = req.query;
+        const userId = req.user.id;
         if (!userId) {
             return res.status(200).json([]);
         }
